@@ -45,19 +45,31 @@
             @endif
             <li class="nav-item">
               <a class="nav-link" href="#navbar-member" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-member">
-                <i class="ni ni-user-run text-info"></i>
-                <span class="nav-link-text">Member</span>
+                <i class="ni ni-money-coins text-info"></i>
+                <span class="nav-link-text">Finance</span>
               </a>
               <div class="collapse" id="navbar-member">
                 <ul class="nav nav-sm flex-column">
                   <li class="nav-item">
-                    <a href="{{route('member.index')}}" class="nav-link">Member Mata Air</a>
+                    <a href="{{route('income.index')}}" class="nav-link">Income</a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('user.index')}}" class="nav-link">Member Kartini</a>
+                    <a href="{{route('income.index')}}" class="nav-link">Expenditure</a>
                   </li>
                 </ul>
               </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('home')}}">
+              <i class="ni ni-satisfied text-warning"></i>
+                <span class="nav-link-text">Money Together</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('home')}}">
+              <i class="ni ni-user-run text-primary"></i>
+                <span class="nav-link-text">Bill</span>
+              </a>
             </li>
           </ul>
         </div>

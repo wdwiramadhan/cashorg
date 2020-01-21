@@ -30,5 +30,12 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/', 'MemberController@store')->name('.store');
 		Route::put('/{id}', 'MemberController@update')->name('.update');
 	});
+	Route::group(['prefix' => 'income', 'as' => 'income'], function(){
+		Route::get('/', 'IncomeController@index')->name('.index');
+		Route::get('/dataincome', 'IncomeController@dataincome')->name('.dataincome');
+		Route::get('/create', 'IncomeController@create')->name('.create');
+		Route::post('/', 'IncomeController@store')->name('.store');
+		Route::put('/{id}', 'IncomeController@update')->name('.update');
+	});
 });
 
