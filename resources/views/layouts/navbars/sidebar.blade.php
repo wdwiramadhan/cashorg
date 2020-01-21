@@ -28,7 +28,7 @@
                 <span class="nav-link-text">Dashboards</span>
               </a>
             </li>
-            @if(auth()->user()->role == 'super admin')
+            @if(auth()->user()->role == 'admin')
             <li class="nav-item">
               <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
                 <i class="ni ni-ungroup text-orange"></i>

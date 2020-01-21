@@ -15,7 +15,7 @@ class CheckRole
      */
     public function handle($request, Closure $next)
     {
-        if($request->user()->role == 'super admin'){
+        if($request->user()->role == 'admin'){
             return $next($request);
         }else{
             return abort(403);
