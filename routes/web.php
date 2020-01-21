@@ -30,5 +30,14 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/', 'MemberController@store')->name('.store');
 		Route::put('/{id}', 'MemberController@update')->name('.update');
 	});
+	Route::group(['prefix' => 'type', 'as' => 'type'], function(){
+		Route::get('/', 'TypeController@index')->name('.index');
+		Route::get('/create', 'TypeController@create')->name('.create');
+		Route::post('/', 'TypeController@store')->name('.store');
+		Route::delete('/{id}', 'TypeController@destroy')->name('.destroy');
+		Route::put('/{id}', 'TypeController@update')->name('.update');
+		Route::get('/edit/{id}', 'TypeController@edit')->name('.edit');
+	});
+	
 });
 
