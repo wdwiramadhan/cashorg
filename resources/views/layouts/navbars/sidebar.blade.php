@@ -39,6 +39,9 @@
                   <li class="nav-item">
                     <a href="{{route('user.index')}}" class="nav-link">User Management</a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{route('type.index')}}" class="nav-link">Type Management</a>
+                  </li>
                 </ul>
               </div>
             </li>

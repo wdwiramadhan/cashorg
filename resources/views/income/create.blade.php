@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="post" action="{{ route('user.store') }}" autocomplete="off">
+                        <form method="post" action="{{ route('income.store') }}" autocomplete="off">
                             @csrf
                             
                             <h6 class="heading-small text-muted mb-4">{{ __('Add Income') }}</h6>
@@ -35,8 +35,9 @@
                                 <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-type">{{ __('Type') }}</label>
                                     <select class="form-control" id="input-type" name="type">
-                                        
-                                        <option>1</option>
+                                        @foreach($types as $type)
+                                            <option value="{{$type->name}}">{{$type->name}}</option>
+                                        @endforeach
                                     </select>
 
                                     @if ($errors->has('type'))
@@ -47,7 +48,22 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('month') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-month">{{ __('Month') }}</label>
-                                    <input month="text" name="month" id="input-month" class="form-control {{ $errors->has('month') ? ' is-invalid' : '' }}" placeholder="{{ __('Month') }}" value="{{ old('month') }}" required autofocus>
+                                    <select class="form-control" id="input-month" name="month">               
+                                        <option value="">-- Opsional --</option>
+                                        <option value="Januari">Januari</option>
+                                        <option value="Febuari">Febuari</option>
+                                        <option value="Maret">Maret</option>
+                                        <option value="April">April</option>
+                                        <option value="Mei">Mei</option>
+                                        <option value="Juni">Juni</option>
+                                        <option value="Juli">Juli</option>
+                                        <option value="Agustus">Agustus</option>
+                                        <option value="September">September</option>
+                                        <option value="Oktober">Oktober</option>
+                                        <option value="November">November</option>
+                                        <option value="Desember">November</option>
+                                    </select>
+
 
                                     @if ($errors->has('month'))
                                         <span class="invalid-feedback" role="alert">

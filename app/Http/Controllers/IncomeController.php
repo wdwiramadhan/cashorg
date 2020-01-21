@@ -31,7 +31,10 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        return view('income.create');
+        $types = \App\Type::get();
+        return view('income.create', [
+            'types' => $types
+        ]);
     }
 
     /**
@@ -42,7 +45,17 @@ class IncomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $income = [
+            'user_id' => auth()->user()->id,
+            'amount' => $request->amount,
+            'type' => $request->type,
+            'month' => $request->month,
+            'organization_id' => auth()->user()->organization_id
+        ];
+        
+        Income::create($income);
+
+        return redirect()->route('income.index')->withStatus(__('Income successfully added.'));
     }
 
     /**
