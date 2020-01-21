@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Income;
+use App\Montog;
 use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
 
-class IncomeController extends Controller
+class MontogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +14,7 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        return view('income.index');
-    }
-
-    public function dataincome()
-    {
-        $query = Income::with('user')->where('organization_id', auth()->user()->organization_id);
-        return Datatables::of($query)->make(true);
+        //
     }
 
     /**
@@ -31,10 +24,7 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        $types = \App\Type::get();
-        return view('income.create', [
-            'types' => $types
-        ]);
+        //
     }
 
     /**
@@ -45,26 +35,16 @@ class IncomeController extends Controller
      */
     public function store(Request $request)
     {
-        $income = [
-            'user_id' => auth()->user()->id,
-            'amount' => $request->amount,
-            'type' => $request->type,
-            'month' => $request->month,
-            'organization_id' => auth()->user()->organization_id
-        ];
-        
-        Income::create($income);
-
-        return redirect()->route('income.index')->withStatus(__('Income successfully added.'));
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Income  $income
+     * @param  \App\Montog  $montog
      * @return \Illuminate\Http\Response
      */
-    public function show(Income $income)
+    public function show(Montog $montog)
     {
         //
     }
@@ -72,10 +52,10 @@ class IncomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Income  $income
+     * @param  \App\Montog  $montog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Income $income)
+    public function edit(Montog $montog)
     {
         //
     }
@@ -84,10 +64,10 @@ class IncomeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Income  $income
+     * @param  \App\Montog  $montog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Income $income)
+    public function update(Request $request, Montog $montog)
     {
         //
     }
@@ -95,10 +75,10 @@ class IncomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Income  $income
+     * @param  \App\Montog  $montog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Income $income)
+    public function destroy(Montog $montog)
     {
         //
     }

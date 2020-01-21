@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Income;
+use App\Bill;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
-class IncomeController extends Controller
+class BillController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +15,13 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        return view('income.index');
+        return view('bill.index');
     }
 
-    public function dataincome()
-    {
-        $query = Income::with('user')->where('organization_id', auth()->user()->organization_id);
+    public function databill(){
+        $query = Bill::with('user')->where('user_id', auth()->user()->id);
         return Datatables::of($query)->make(true);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -31,10 +29,7 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        $types = \App\Type::get();
-        return view('income.create', [
-            'types' => $types
-        ]);
+        return view('bill.create');
     }
 
     /**
@@ -45,26 +40,22 @@ class IncomeController extends Controller
      */
     public function store(Request $request)
     {
-        $income = [
+        $bill = [
             'user_id' => auth()->user()->id,
             'amount' => $request->amount,
             'type' => $request->type,
             'month' => $request->month,
-            'organization_id' => auth()->user()->organization_id
+            'due_date' => $request->due_date    
         ];
-        
-        Income::create($income);
-
-        return redirect()->route('income.index')->withStatus(__('Income successfully added.'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Income  $income
+     * @param  \App\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function show(Income $income)
+    public function show(Bill $bill)
     {
         //
     }
@@ -72,10 +63,10 @@ class IncomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Income  $income
+     * @param  \App\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function edit(Income $income)
+    public function edit(Bill $bill)
     {
         //
     }
@@ -84,10 +75,10 @@ class IncomeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Income  $income
+     * @param  \App\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Income $income)
+    public function update(Request $request, Bill $bill)
     {
         //
     }
@@ -95,10 +86,10 @@ class IncomeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Income  $income
+     * @param  \App\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Income $income)
+    public function destroy(Bill $bill)
     {
         //
     }

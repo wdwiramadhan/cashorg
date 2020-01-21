@@ -39,6 +39,12 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::put('/{id}', 'TypeController@update')->name('.update');
 		Route::get('/edit/{id}', 'TypeController@edit')->name('.edit');
 	});
-	
+	Route::group(['prefix' => 'bill', 'as' => 'bill'], function(){
+		Route::get('/', 'BillController@index')->name('.index');
+		Route::get('/databill', 'BillController@databill')->name('.databill');
+		Route::get('/create', 'BillController@create')->name('.create');
+		Route::post('/', 'BillController@store')->name('.store');
+		Route::put('/{id}', 'BillController@update')->name('.update');
+	});
 });
 

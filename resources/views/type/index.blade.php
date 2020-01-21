@@ -33,27 +33,23 @@
                         <table class="table align-items-center table-flush" id="type-table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">Id</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php $nomor = 1 ?>
                             @foreach($types as $type)
                             <tr>
-                                <th scope="row">{{$nomor}}</th>
                                 <td>{{$type->name}}</td>
                                 <td>
-                                <a href="{{route('type.edit', $type->id)}}" class="btn btn-secondary d-inline-block">Edit</a>
+                                <a href="{{route('type.edit', $type->id)}}" class="btn btn-primary btn-sm d-inline-block">Edit</a>
                                 <form action="{{route('type.destroy', $type->id)}}" method="post" class="d-inline-block">
                                     {{csrf_field()}}
                                     {{method_field('delete')}}
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
                                 </td>
                             </tr>
-                            <?php $nomor++ ?>
                             @endforeach
                             </tbody>
                         </table>

@@ -65,11 +65,11 @@
             <li class="nav-item">
               <a class="nav-link" href="{{route('home')}}">
               <i class="ni ni-satisfied text-warning"></i>
-                <span class="nav-link-text">Money Together</span>
+                <span class="nav-link-text">Montog</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{route('home')}}">
+              <a class="nav-link" href="{{route('bill.index')}}">
               <i class="ni ni-user-run text-primary"></i>
                 <span class="nav-link-text">Bill</span>
               </a>
