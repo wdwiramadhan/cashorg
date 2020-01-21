@@ -34,7 +34,10 @@
                                 </div>
                                 <div class="form-group{{ $errors->has('type') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-type">{{ __('Type') }}</label>
-                                    <input type="text" name="type" id="input-type" class="form-control {{ $errors->has('type') ? ' is-invalid' : '' }}" placeholder="{{ __('Type') }}" value="{{ old('type') }}" required autofocus>
+                                    <select class="form-control" id="input-type" name="type">
+                                        
+                                        <option>1</option>
+                                    </select>
 
                                     @if ($errors->has('type'))
                                         <span class="invalid-feedback" role="alert">

@@ -24,12 +24,6 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::put('/', 'ProfileController@update')->name('.update');
 		Route::put('/password', 'ProfileController@password')->name('.password');
 	});
-	Route::group(['prefix' => 'member', 'as' => 'member'], function(){
-		Route::get('/', 'MemberController@index')->name('.index');
-		Route::get('/create', 'MemberController@create')->name('.create');
-		Route::post('/', 'MemberController@store')->name('.store');
-		Route::put('/{id}', 'MemberController@update')->name('.update');
-	});
 	Route::group(['prefix' => 'income', 'as' => 'income'], function(){
 		Route::get('/', 'IncomeController@index')->name('.index');
 		Route::get('/dataincome', 'IncomeController@dataincome')->name('.dataincome');
@@ -37,5 +31,14 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/', 'IncomeController@store')->name('.store');
 		Route::put('/{id}', 'IncomeController@update')->name('.update');
 	});
+	Route::group(['prefix' => 'type', 'as' => 'type'], function(){
+		Route::get('/', 'TypeController@index')->name('.index');
+		Route::get('/create', 'TypeController@create')->name('.create');
+		Route::post('/', 'TypeController@store')->name('.store');
+		Route::delete('/{id}', 'TypeController@destroy')->name('.destroy');
+		Route::put('/{id}', 'TypeController@update')->name('.update');
+		Route::get('/edit/{id}', 'TypeController@edit')->name('.edit');
+	});
+	
 });
 
