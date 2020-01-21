@@ -39,6 +39,12 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::put('/{id}', 'TypeController@update')->name('.update');
 		Route::get('/edit/{id}', 'TypeController@edit')->name('.edit');
 	});
-	
+	Route::group(['prefix' => 'expenditure', 'as' => 'expenditure'], function(){
+		Route::get('/', 'ExpenditureController@index')->name('.index');
+		Route::get('/dataexpenditure', 'ExpenditureController@dataexpenditure')->name('.dataexpenditure');
+		Route::get('/create', 'ExpenditureController@create')->name('.create');
+		Route::post('/', 'ExpenditureController@store')->name('.store');
+		Route::put('/{id}', 'ExpenditureController@update')->name('.update');
+	});
 });
 

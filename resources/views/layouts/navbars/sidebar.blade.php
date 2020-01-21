@@ -57,7 +57,7 @@
                     <a href="{{route('income.index')}}" class="nav-link">Income</a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('income.index')}}" class="nav-link">Expenditure</a>
+                    <a href="{{route('expenditure.index')}}" class="nav-link">Expenditure</a>
                   </li>
                 </ul>
               </div>
