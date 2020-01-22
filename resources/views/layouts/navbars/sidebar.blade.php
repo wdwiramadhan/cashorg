@@ -4,7 +4,8 @@
       <!-- Brand -->
       <div class="sidenav-header d-flex align-items-center">
         <a class="navbar-brand" href="{{ route('home') }}">
-          <img src="{{ asset('argon') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
+          <img src="{{ asset('argon') }}/img/brand/cashorg.png" class="navbar-brand-img" alt="...">
+          <span class="font-weight-bold ">Cashorg</span>
         </a>
         <div class="ml-auto">
           <!-- Sidenav toggler -->
@@ -42,6 +43,12 @@
                   <li class="nav-item">
                     <a href="{{route('type.index')}}" class="nav-link">Type Management</a>
                   </li>
+                  <li class="nav-item">
+                    <a href="{{route('bill.create')}}" class="nav-link">Create Bills</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('bill.confirm')}}" class="nav-link">Payment Confirmation</a>
+                  </li>
                 </ul>
               </div>
             </li>
@@ -57,13 +64,13 @@
                     <a href="{{route('income.index')}}" class="nav-link">Income</a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{route('income.index')}}" class="nav-link">Expenditure</a>
+                    <a href="{{route('expenditure.index')}}" class="nav-link">Expenditure</a>
                   </li>
                 </ul>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{route('home')}}">
+              <a class="nav-link" href="{{route('montog.index')}}">
               <i class="ni ni-satisfied text-warning"></i>
                 <span class="nav-link-text">Montog</span>
               </a>

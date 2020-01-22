@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => __('Income')])
+@extends('layouts.app', ['title' => __('Montog')])
 @push('css')
     <link rel="stylesheet" href="{{ asset('argon') }}/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
 @endpush
@@ -11,7 +11,10 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">{{ __('Your Bill') }}</h3>
+                            <h3 class="mb-0">{{ __('Money Together') }}</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <a href="{{ route('income.create') }}" class="btn btn-sm btn-primary">{{ __('Add income') }}</a>
                         </div>
                     </div>
                 </div>  
@@ -31,11 +34,9 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Amount</th>
+                                   <th scope="col">From</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Month</th>
-                                    <th scope="col">Over Due</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                         </table>
@@ -64,21 +65,21 @@
                         // sLast: '<i class="fa fa-step-forward"></i>'
                     }
                 }  ,
-                ajax: '{!! route('bill.databill') !!}',
+                ajax: '{!! route('income.dataincome') !!}',
                 columns: [
                     { name: 'amount', data: 'amount', },
+                    { name: 'from', data: 'user.name'},
                     { name: 'type', data: 'type'},
                     { name: 'month', data: 'month'},
-                    { name: 'due_date', data: 'due_date'}, 
-                    { name: 'status', data: 'status'}, 
-                    { data: 'id',
-                        render: function(data) { 
-                            const link = "{{route('bill.index')}}"+"/show/"+data
-                            return `
-                                <a class="btn btn-primary btn-sm btn-xs" stlye="margin: 0 3px" href="${link}">Pay Now</a>
-                            `
-                        }
-                    },
+                    // { data: 'id',
+                    //     render: function(data) { 
+                    //         const link = "{{route('user.index')}}"+"/"+data
+                    //         return `
+                    //             <a class="btn btn-primary btn-sm btn-xs" stlye="margin: 0 3px" href="${link}/edit">Edit</a>
+                    //             <form role="form" action="${link}" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('delete ')}}<button class="btn btn-sm btn-danger btn-xs">Delete</button></form>
+                    //         `
+                    //     }
+                    // },
                 ]
             });
         });

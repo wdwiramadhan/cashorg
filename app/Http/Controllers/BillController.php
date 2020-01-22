@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Bill;
+use App\Income;
+use App\Type;
+use App\User;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
@@ -29,7 +32,10 @@ class BillController extends Controller
      */
     public function create()
     {
-        return view('bill.create');
+        $types = Type::get();
+        return view('bill.create',[
+            'types' =>$types
+        ]);
     }
 
     /**
@@ -40,13 +46,19 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        $bill = [
-            'user_id' => auth()->user()->id,
-            'amount' => $request->amount,
-            'type' => $request->type,
-            'month' => $request->month,
-            'due_date' => $request->due_date    
-        ];
+        $user = User::get()->count();
+        for($i = 1 ; $i<= $user; $i++){
+            $bill = [
+                'user_id' => $i,
+                'amount' => $request->amount,
+                'type' => $request->type,
+                'month' => $request->month,
+                'status' => 'unpaid',
+                'due_date' => now()   
+            ];
+            Bill::create($bill);
+        }
+        return redirect()->route('bill.index')->withStatus(__('bill successfully added.'));
     }
 
     /**
@@ -55,9 +67,12 @@ class BillController extends Controller
      * @param  \App\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function show(Bill $bill)
+    public function show($id)
     {
-        //
+        $bill = Bill::with('user')->findOrfail($id);
+        return view('bill.show',[
+            'bill' => $bill
+        ]);
     }
 
     /**
@@ -78,9 +93,19 @@ class BillController extends Controller
      * @param  \App\Bill  $bill
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bill $bill)
+    public function update($id)
     {
-        //
+        $bill = Bill::findOrfail($id);
+        $data = [
+            'amount' => $bill->amount,
+            'type' => $bill->type,
+            'month' => $bill->month,
+            'due_date' => $bill->due_date,
+            'status' => 'pending',
+        ];
+        $bill->update($data);
+
+        return redirect()->route('bill.index')->withStatus(__('bill successfully edited.'));
     }
 
     /**
@@ -91,6 +116,35 @@ class BillController extends Controller
      */
     public function destroy(Bill $bill)
     {
-        //
+       
+    }
+
+    public function update2($id){
+        $bill = Bill::with('user')->findOrfail($id);
+        $data = [
+            'amount' => $bill->amount,
+            'type' => $bill->type,
+            'month' => $bill->month,
+            'due_date' => $bill->due_date,
+            'status' => 'paid',
+        ];
+        $bill->update($data);
+
+        $new = [
+            'user_id' => $bill->user_id,
+            'amount' => $bill->amount,
+            'type' => $bill->type,
+            'month' => $bill->month,
+            'user_id' => $bill->user_id,
+            'organization_id' => $bill->user->organization_id
+        ];
+        Income::create($new);
+
+        $bill->delete();
+        return redirect()->route('bill.confirm')->withStatus(__('Confirmation success'));
+    }
+
+    public function confirm(){
+        return view('bill.confirm');
     }
 }

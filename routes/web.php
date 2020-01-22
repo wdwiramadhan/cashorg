@@ -41,10 +41,27 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 	Route::group(['prefix' => 'bill', 'as' => 'bill'], function(){
 		Route::get('/', 'BillController@index')->name('.index');
+		Route::get('/show/{id}', 'BillController@show')->name('.show');
 		Route::get('/databill', 'BillController@databill')->name('.databill');
 		Route::get('/create', 'BillController@create')->name('.create');
 		Route::post('/', 'BillController@store')->name('.store');
 		Route::put('/{id}', 'BillController@update')->name('.update');
+		Route::get('/confirm', 'BillController@confirm')->name('.confirm');
+		Route::put('/update2/{id}', 'BillController@update2')->name('.update2');
+	});
+	Route::group(['prefix' => 'expenditure', 'as' => 'expenditure'], function(){
+		Route::get('/', 'ExpenditureController@index')->name('.index');
+		Route::get('/dataexpenditure', 'ExpenditureController@dataexpenditure')->name('.dataexpenditure');
+		Route::get('/create', 'ExpenditureController@create')->name('.create');
+		Route::post('/', 'ExpenditureController@store')->name('.store');
+		Route::put('/{id}', 'ExpenditureController@update')->name('.update');
+	});
+	Route::group(['prefix' => 'montog', 'as' => 'montog'], function(){
+		Route::get('/', 'MontogController@index')->name('.index');
+		Route::get('/datamontog', 'MontogController@datamontog')->name('.datamontog');
+		Route::get('/create', 'MontogController@create')->name('.create');
+		Route::post('/', 'MontogController@store')->name('.store');
+		Route::put('/{id}', 'MontogController@update')->name('.update');
 	});
 });
 

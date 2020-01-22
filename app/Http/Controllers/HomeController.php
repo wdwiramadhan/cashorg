@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use \App\Income;
+use \App\Expenditure;
+use \App\User;
 
 class HomeController extends Controller
 {
@@ -21,6 +24,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $user = User::get()->count();
+        $totalincome = 0;
+        $incomes = Income::get();
+        foreach($incomes as $income){
+            $totalincome += $income->amount;
+        }
+        $totalexp = 0;
+        $expenditures = Expenditure::get();
+        foreach($expenditures as $exp){
+            $totalexp += $exp->amount;
+        }
+        $balance = $totalincome - $totalexp;
+        return view('dashboard',[
+            'user' =>$user,
+            'income' => $totalincome,
+            'expenditure' => $totalexp,
+            'balance' => $balance
+        ]);
     }
 }

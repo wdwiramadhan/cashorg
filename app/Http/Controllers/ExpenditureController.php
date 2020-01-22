@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Montog;
-use Illuminate\Http\Request;
 
-class MontogController extends Controller
+use App\Expenditure;
+use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
+
+class ExpenditureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +16,14 @@ class MontogController extends Controller
      */
     public function index()
     {
-        return view('montog.index');
+        return view('expenditure.index');
     }
 
+    public function dataexpenditure()
+    {
+        $query = Expenditure::where('organization_id', auth()->user()->organization_id);
+        return Datatables::of($query)->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +31,8 @@ class MontogController extends Controller
      */
     public function create()
     {
-        //
+        $types = \App\Type::get();
+        return view('expenditure.create');
     }
 
     /**
@@ -35,16 +43,24 @@ class MontogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $expenditure = [
+            'amount' => $request->amount,
+            'for' => $request->for,
+            'organization_id' => auth()->user()->organization_id
+        ];
+        
+        Expenditure::create($expenditure);
+
+        return redirect()->route('expenditure.index')->withStatus(__('expenditure successfully added.'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Montog  $montog
+     * @param  \App\Expenditure  $expenditure
      * @return \Illuminate\Http\Response
      */
-    public function show(Montog $montog)
+    public function show(Expenditure $expenditure)
     {
         //
     }
@@ -52,10 +68,10 @@ class MontogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Montog  $montog
+     * @param  \App\Expenditure  $expenditure
      * @return \Illuminate\Http\Response
      */
-    public function edit(Montog $montog)
+    public function edit(Expenditure $expenditure)
     {
         //
     }
@@ -64,10 +80,10 @@ class MontogController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Montog  $montog
+     * @param  \App\Expenditure  $expenditure
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Montog $montog)
+    public function update(Request $request, Expenditure $expenditure)
     {
         //
     }
@@ -75,10 +91,10 @@ class MontogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Montog  $montog
+     * @param  \App\Expenditure  $expenditure
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Montog $montog)
+    public function destroy(Expenditure $expenditure)
     {
         //
     }

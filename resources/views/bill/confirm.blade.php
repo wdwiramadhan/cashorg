@@ -11,7 +11,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">{{ __('Your Bill') }}</h3>
+                            <h3 class="mb-0">{{ __('Payment Confirmation') }}</h3>
                         </div>
                     </div>
                 </div>  
@@ -73,9 +73,9 @@
                     { name: 'status', data: 'status'}, 
                     { data: 'id',
                         render: function(data) { 
-                            const link = "{{route('bill.index')}}"+"/show/"+data
+                            const link = "{{route('bill.index')}}"+"/update2/"+data
                             return `
-                                <a class="btn btn-primary btn-sm btn-xs" stlye="margin: 0 3px" href="${link}">Pay Now</a>
+                            <form role="form" action="${link}" style="margin: 0 3px;display:inline" method="POST">{{ csrf_field()}}{{method_field('put')}}<button class="btn btn-sm btn-primary btn-xs">Confirm</button></form>
                             `
                         }
                     },

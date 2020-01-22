@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Montog;
+use App\Payment;
 use Illuminate\Http\Request;
 
-class MontogController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class MontogController extends Controller
      */
     public function index()
     {
-        return view('montog.index');
+        return view('payment.index');
     }
 
     /**
@@ -35,16 +35,20 @@ class MontogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $payment = [
+            'user_id' => auth()->user()->id,
+            'bill_id' => 1,
+            'status' => 'unpaid'
+        ];
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Montog  $montog
+     * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show(Montog $montog)
+    public function show(Payment $payment)
     {
         //
     }
@@ -52,10 +56,10 @@ class MontogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Montog  $montog
+     * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Montog $montog)
+    public function edit(Payment $payment)
     {
         //
     }
@@ -64,10 +68,10 @@ class MontogController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Montog  $montog
+     * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Montog $montog)
+    public function update(Request $request, Payment $payment)
     {
         //
     }
@@ -75,10 +79,10 @@ class MontogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Montog  $montog
+     * @param  \App\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Montog $montog)
+    public function destroy(Payment $payment)
     {
         //
     }
